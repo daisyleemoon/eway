@@ -3,7 +3,12 @@ module.exports = {
     browser: true,
     es2021: true,
   },
-  extends: ['eslint:recommended', 'airbnb', 'plugin:react/jsx-runtime'],
+  extends: [
+    'eslint:recommended',
+    'airbnb',
+    'plugin:react/recommended',
+    'plugin:react/jsx-runtime',
+  ],
   overrides: [],
   parser: '@typescript-eslint/parser',
   parserOptions: {

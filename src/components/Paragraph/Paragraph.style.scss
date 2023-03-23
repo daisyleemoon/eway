@@ -1,0 +1,18 @@
+.paragraphContainer {
+  display: grid;
+  place-items: center;
+  margin: 24px 0 16px 0;
+  .cactusParagraph {
+    display: flex;
+    align-items: center;
+    color: #204379;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 22px;
+    text-align: center;
+    img {
+      width: 30px;
+      height: 40px;
+    }
+  }
+}
