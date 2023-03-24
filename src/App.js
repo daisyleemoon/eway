@@ -3,7 +3,7 @@ import Title from './components/Title/Title';
 import DrawInformation from './components/DrawInformation/DrawInformation';
 import DrawPrize from './components/DrawPrize/DrawPrize';
 import Market from './components/Market/Market';
-import LightHouse from './components/LightHouse/LightHouse';
+import Lighthouse from './components/Lighthouse/Lighthouse';
 
 function App() {
   return (
@@ -11,7 +11,7 @@ function App() {
       <Title />
       <DrawInformation />
       <DrawPrize />
-      <LightHouse />
+      <Lighthouse />
       <Market />
     </div>
   );

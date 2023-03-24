@@ -1,4 +1,15 @@
 .drawPrizeContainer {
+  display: grid;
+  place-items: center;
   width: 100%;
-  height: 513px;
+  height: auto;
+  background-image: url('../../images/sand.png');
+  .drawPrizeItemsWrap {
+    display: grid;
+    margin: 65px 0 50px 0;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-auto-flow: row;
+    gap: 40px 32px;
+    width: 600px;
+  }
 }

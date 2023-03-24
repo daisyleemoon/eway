@@ -1,3 +1,43 @@
-.lightHouseContainer {
+.lighthouseContainer {
+  display: grid;
+  place-items: center;
   height: 378px;
+  .lighthouseContent {
+    width: 274px;
+    height: 298px;
+    display: grid;
+    grid-template-columns: 20px 216px 20px;
+    grid-auto-flow: row;
+
+    .slashLeft,
+    .slashRight {
+      width: 20px;
+      height: 75px;
+      align-self: end;
+    }
+    .lighthouseText {
+      display: grid;
+      align-items: end;
+      margin: 0;
+      text-align: center;
+      width: 216px;
+      height: 75px;
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 140%;
+      color: #204379;
+      span:first-child {
+        color: #b57556;
+        margin: 0;
+      }
+    }
+    .lighthouse {
+      justify-self: center;
+      align-self: end;
+      grid-column: 2/ 3;
+      width: 56px;
+      height: 194px;
+      margin-top: 20px;
+    }
+  }
 }

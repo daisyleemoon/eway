@@ -1,0 +1,83 @@
+.jackpot,
+.prizeAward {
+  width: 178px;
+  height: 112px;
+  background-color: #ffffff;
+  box-shadow: 0px 8px 0px #edeef0;
+  border-radius: 20px;
+  position: relative;
+
+  img {
+    position: absolute;
+    left: 58px;
+    top: -22px;
+  }
+
+  .letter {
+    display: grid;
+    place-items: center;
+    width: 65px;
+    height: 65px;
+    position: absolute;
+    left: 58px;
+    top: -22px;
+    z-index: 1;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 16.92px;
+    line-height: 125%;
+  }
+
+  .prizeAmount {
+    display: grid;
+    place-items: center;
+    position: absolute;
+    top: 18px;
+    right: 8px;
+    width: 43px;
+    height: 23px;
+    background: #fafafa;
+    border-radius: 50px;
+    font-size: 12px;
+    line-height: 140%;
+  }
+  p {
+    display: grid;
+    place-items: center;
+    width: 178px;
+    height: 44px;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 125%;
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+  }
+}
+
+.jackpot {
+  img {
+    width: 65px;
+    height: 78px;
+  }
+  .prizeAmount {
+    border: 1px solid #b3b960;
+    color: #b3b960;
+  }
+  p {
+    color: #b3b960;
+  }
+}
+.prizeAward {
+  img {
+    width: 65px;
+    height: 65px;
+  }
+  .prizeAmount {
+    border: 1px solid #a0bcc8;
+    color: #a0bcc8;
+  }
+  p {
+    color: #a0bcc8;
+  }
+}
