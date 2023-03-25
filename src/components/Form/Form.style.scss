@@ -1,3 +1,10 @@
 .formContainer {
+  display: flex;
+  flex-direction: column;
   width: 808px;
+  height: 575px;
+  background-color: #ffffff;
+  border: 2px solid #b57556;
+  box-shadow: 0px 1px 20px rgba(73, 72, 72, 0.25);
+  border-radius: 16px;
 }

@@ -16,7 +16,7 @@ function Title() {
           <br />
           who loves pain
         </p>
-        <Button>FORM</Button>
+        <Button buttonType="button">FORM</Button>
         <div className="titleParagraphContainer">
           <Paragraph>paragraph</Paragraph>
           <ol>
