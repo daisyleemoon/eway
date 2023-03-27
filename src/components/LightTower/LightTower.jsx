@@ -2,9 +2,9 @@ import lighthouseIcon from '../../images/lighthouse.png';
 import slashLeftIcon from '../../images/slash_left.png';
 import slashRightIcon from '../../images/slash_right.png';
 
-import './Lighthouse.style.scss';
+import './LightTower.style.scss';
 
-function Lighthouse() {
+function LightTower() {
   return (
     <div className="lighthouseContainer">
       <div className="lighthouseContent">
@@ -15,10 +15,10 @@ function Lighthouse() {
           <span>wants to have it</span>
         </div>
         <img className="slashRight" src={slashRightIcon} alt="" />
-        <img className="lighthouse" src={lighthouseIcon} alt="" />
+        <img className="tower" src={lighthouseIcon} alt="" />
       </div>
     </div>
   );
 }
 
-export default Lighthouse;
+export default LightTower;

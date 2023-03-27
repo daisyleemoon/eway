@@ -4,7 +4,7 @@ import Title from './components/Title/Title';
 import DrawInfoForm from './components/DrawInfoForm/DrawInfoForm';
 import DrawPrize from './components/DrawPrize/DrawPrize';
 import Market from './components/Market/Market';
-import Lighthouse from './components/Lighthouse/Lighthouse';
+import LightTower from './components/LightTower/LightTower';
 
 function App() {
   const scrollTargetFormRef = useRef(null);
@@ -18,7 +18,7 @@ function App() {
       <Title scrollToForm={scrollToForm} />
       <DrawInfoForm scrollTargetFormRef={scrollTargetFormRef} />
       <DrawPrize />
-      <Lighthouse />
+      <LightTower />
       <Market />
     </div>
   );
