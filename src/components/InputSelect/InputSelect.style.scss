@@ -1,8 +1,5 @@
-.inputStoreContainer {
-  input::-webkit-calendar-picker-indicator {
-    opacity: 0;
-  }
-  input {
+.formLabel {
+  select {
     background-image: url('../../images/drop＿down.png');
     background-repeat: no-repeat;
     background-size: 24px 24px;

@@ -1,10 +1,128 @@
+@import '../../mixin';
+
 .formContainer {
-  display: flex;
-  flex-direction: column;
-  width: 808px;
+  display: grid;
+  place-items: center;
   height: 575px;
-  background-color: #ffffff;
-  border: 2px solid #b57556;
-  box-shadow: 0px 1px 20px rgba(73, 72, 72, 0.25);
-  border-radius: 16px;
+  position: relative;
+  @include wide {
+    width: 58%;
+    max-width: 808px;
+  }
+  @include pad {
+    width: 100%;
+    padding: 0 24px;
+    max-width: 808px;
+    min-width: 720px;
+  }
+  @include mobile {
+    width: 100%;
+    padding: 0 24px;
+    min-width: 366px;
+  }
+  form {
+    display: grid;
+    place-items: center;
+    height: 100%;
+    width: 100%;
+    .inputContainer {
+      margin: 40px 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background-color: #ffffff;
+      border: 2px solid #b57556;
+      box-shadow: 0px 1px 20px rgba(73, 72, 72, 0.25);
+      border-radius: 16px;
+    }
+    button {
+      cursor: pointer;
+      margin-top: 30px;
+      img {
+        width: 24px;
+        height: 24px;
+        display: none;
+      }
+    }
+    button:active {
+      opacity: 0.5;
+      transform: scale(1.2);
+    }
+    .success {
+      color: #e6ffb1;
+      div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .s {
+          display: block;
+          margin-right: 16px;
+        }
+      }
+    }
+    .failure {
+      color: #ffe3e3;
+      div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .f {
+          display: block;
+          margin-right: 16px;
+        }
+      }
+    }
+    .formValidityMessage {
+      font-size: 14px;
+      line-height: 150%;
+      color: #e06d6d;
+      margin: 8px 0 0 0;
+    }
+  }
+  .formTitle {
+    display: grid;
+    position: absolute;
+    top: 0;
+    right: 50%;
+    transform: translate(50%, -50%);
+    place-items: center;
+    width: 123px;
+    height: 43px;
+    background: #ffffff;
+    border: 2px solid #b57556;
+    color: #b57556;
+    box-shadow: 0px 1px 10px rgba(73, 72, 72, 0.25);
+    border-radius: 50px;
+    font-size: 18px;
+    line-height: 125%;
+    text-align: center;
+    letter-spacing: 0.2em;
+    img {
+      position: absolute;
+      width: 64px;
+      height: 61.5px;
+      right: -40px;
+      animation: turtle 10s linear infinite;
+    }
+
+    @keyframes turtle {
+      0% {
+        transform: translate(0);
+      }
+      40% {
+        transform: translate(-110px, -30px) rotate(-50deg);
+      }
+      60% {
+        transform: translate(-120px, 10px) rotate(-180deg);
+      }
+      80% {
+        transform: translate(-80px, 30px) rotate(-200deg);
+      }
+      100% {
+        transform: translate(0) rotate(-360deg);
+      }
+    }
+  }
 }

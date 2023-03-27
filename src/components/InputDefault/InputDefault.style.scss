@@ -11,9 +11,11 @@
     font-size: 14px;
     line-height: 140%;
   }
-  input {
+  input,
+  select {
     width: 100%;
     height: 57px;
+    padding-left: 16px;
     border: 1px solid #204379;
     background-color: #ffffff;
     border-radius: 20px;
@@ -22,12 +24,26 @@
     appearance: none;
     font-size: 16px;
     line-height: 140%;
+    color: #212121;
   }
-  input:focus {
+  input:focus,
+  select:focus {
     outline: none;
     border: 3px solid #93bbf9;
   }
-  input:invalid {
+  input:focus:required:invalid,
+  select:invalid {
     border: 3px solid #e06d6d;
+  }
+  .validityMessage {
+    margin: 4px 0;
+    color: #e06d6d;
+    font-size: 12px;
+    line-height: 140%;
+  }
+  .hiddenP {
+    visibility: hidden;
+    height: 20px;
+    margin: 0;
   }
 }

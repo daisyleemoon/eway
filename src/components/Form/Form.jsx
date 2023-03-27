@@ -1,16 +1,20 @@
-// import { useRef, useReducer } from 'react';
+import PropTypes from 'prop-types';
 import { useRef, useState } from 'react';
 import InputDefault from '../InputDefault/InputDefault';
 import InputStore from '../InputStore/InputStore';
 import Button from '../Button/Button';
+import InputSelect from '../InputSelect/InputSelect';
+import turtleIcon from '../../images/turtle.png';
+import successIcon from '../../images/success.png';
+import failureIcon from '../../images/failure.png';
 import './Form.style.scss';
+import InputNumber from '../InputNumber/InputNumber';
 
 // const initialState = {
-//   storeIsValid: null,
-//   nameIsValid: null,
-//   phoneIsValid: null,
-//   amountIsValid: null,
-//   paymentIsValid: null,
+//   storeError: '',
+//   nameError: '',
+//   phoneError: '',
+//   amountError: '',
 // };
 
 // const formReducer = (state = initialState, { type, payload } = {}) => {
@@ -18,32 +22,37 @@ import './Form.style.scss';
 //     case 'store':
 //       return { ...state, storeIsValid: payload };
 //     case 'name':
-//       return { ...state, nameIsValid: payload };
+//       return { ...state, nameError: payload };
 //     case 'phone':
-//       return { ...state, phoneIsValid: payload };
+//       return { ...state, phoneError: payload };
 //     case 'amount':
-//       return { ...state, amountIsValid: payload };
-//     case 'payment':
-//       return { ...state, paymentIsValid: payload };
+//       return { ...state, amountError: payload };
+//     // case 'payment':
+//     //   return { ...state, paymentIsValid: payload };
 //     default:
 //       return state;
 //   }
 // };
 
-function Form() {
+function Form({ scrollTargetFormRef }) {
   const formRef = useRef(null);
-  const [isFormValid, setIsFormValid] = useState('');
-  // const onChangeHandlerName = (event, setError) => {
-  //   const { value } = event.target;
-  //   const regex = /^[-'a-z\u4e00-\u9eff]{1,20}$/i;
-  //   // const reg = /^([^\x00-\x40\x5B-\x60\x7B-\x7F])+$;
-  //   console.log(regex.test(value));
-  //   // console.log(reg.test(value));
-  //   if (!regex.test(value)) {
-  //     return setError('請輸入中文或英文字母');
-  //   }
-  //   return setError('');
-  // };
+  const inputNameRef = useRef(null);
+  const inputPhoneRef = useRef(null);
+  const inputAmountRef = useRef(null);
+  const inputPaymentRef = useRef(null);
+  const [isFormValid, setIsFormValid] = useState(null);
+  const [buttonClassName, setButtonClassName] = useState('');
+  // eslint-disable-next-line no-unused-vars
+  const [isNameValid, setIsNameValid] = useState('');
+  // eslint-disable-next-line no-unused-vars
+  const [isPhoneValid, setIsPhoneValid] = useState('');
+  // eslint-disable-next-line no-unused-vars
+  const [isAmountValid, setIsAmountValid] = useState('');
+  const [trigger, setTrigger] = useState(0);
+
+  const nameChangeHandler = () => inputNameRef.current.validity.valid;
+  const phoneChangeHandler = () => inputPhoneRef.current.validity.valid;
+  const amountChangeHandler = () => inputAmountRef.current.validity.valid;
 
   const onSubmit = (event) => {
     event.preventDefault();
@@ -60,53 +69,102 @@ function Form() {
           type,
           typeMismatch,
           value,
-          valid: x.checkValidity(),
+          valid: x.validity.valid,
         };
       });
-
+    // const emptyInputs = formValues.filter((obj) => obj.value.length === 0);
     const formValidation = formValues.some((obj) => !obj.valid);
-    if (formValidation) {
-      return setIsFormValid('submit error');
+    setTrigger(trigger + 1);
+
+    // formValues.forEach((obj) => {
+    //   if (obj.name === 'name') {
+    //     setIsNameValid('error');
+    //   }
+    //   if (obj.name === 'phone') {
+    //     setIsPhoneValid('error');
+    //   }
+    //   if (obj.name === 'amount') {
+    //     setIsAmountValid('error');
+    //   }
+    // });
+
+    if (!formValidation) {
+      setIsFormValid(true);
+      setButtonClassName('success');
+      return;
     }
-    return setIsFormValid('');
+    setIsFormValid(false);
+    setButtonClassName('failure');
   };
 
   return (
-    <form
-      className="formContainer"
-      onSubmit={onSubmit}
-      ref={formRef}
-      noValidate
-    >
-      <InputStore />
-      <InputDefault
-        inputType="text"
-        inputId="name"
-        inputName="name"
-        inputPattern="^[\u4e00-\u9fa5]+$|^[a-zA-Z\s]+$"
-      >
-        name
-      </InputDefault>
-      <InputDefault
-        inputType="tel"
-        inputId="phone"
-        inputName="phone"
-        inputPattern="^09[0-9]{8}$"
-      >
-        phone
-      </InputDefault>
-      <InputDefault
-        inputType="number"
-        inputId="amount"
-        inputName="amount"
-        inputPattern="^(0|[1-9][0-9]*)$"
-      >
-        Amount of consumption
-      </InputDefault>
-      <Button buttonType="submit">submit</Button>
-      {isFormValid && <p>error message</p>}
-    </form>
+    <div className="formContainer">
+      <form onSubmit={onSubmit} ref={formRef} noValidate>
+        <div className="inputContainer" ref={scrollTargetFormRef}>
+          <InputStore isValid={trigger} errorMessage="請輸入列表中的選項" />
+          <InputDefault
+            inputType="text"
+            inputId="name"
+            inputName="name"
+            inputRef={inputNameRef}
+            inputPattern="^[\u4e00-\u9fa5]+$|^[a-zA-Z\s]+$"
+            onChangeHandler={nameChangeHandler}
+            errorMessage="請輸入中英文字母不包含數字及特殊符號"
+            isValid={trigger}
+          >
+            name
+          </InputDefault>
+          <InputDefault
+            inputType="tel"
+            inputId="phone"
+            inputName="phone"
+            inputPattern="^09[0-9]{8}$"
+            errorMessage="請輸入09開頭十位數數字"
+            onChangeHandler={phoneChangeHandler}
+            inputRef={inputPhoneRef}
+            isValid={trigger}
+          >
+            phone
+          </InputDefault>
+          <InputNumber
+            isValid={trigger}
+            onChangeHandler={amountChangeHandler}
+            errorMessage="請輸入數量為大於等於0的整數（開頭不為0）"
+          >
+            Amount of consumption
+          </InputNumber>
+          <InputSelect inputRef={inputPaymentRef} />
+        </div>
+        <Button buttonType="submit" className={buttonClassName}>
+          {isFormValid === null && 'submit'}
+          {isFormValid === true && (
+            <div>
+              <img className="s" src={successIcon} alt="" />
+              success
+            </div>
+          )}
+          {isFormValid === false && (
+            <div>
+              <img className="f" src={failureIcon} alt="" />
+              failure
+            </div>
+          )}
+        </Button>
+        {isFormValid === false && (
+          <p className="formValidityMessage">error message</p>
+        )}
+      </form>
+      <div className="formTitle">
+        FORM
+        <img src={turtleIcon} alt="" />
+      </div>
+    </div>
   );
 }
+Form.propTypes = {
+  scrollTargetFormRef: PropTypes.shape({
+    current: PropTypes.instanceOf(Element),
+  }).isRequired,
+};
 
 export default Form;

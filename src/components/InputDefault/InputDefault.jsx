@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useRef, useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import './InputDefault.style.scss';
 
@@ -7,18 +7,31 @@ function InputDefault({
   inputId,
   inputName,
   inputType,
+  inputRef,
   inputPattern,
   children,
+  errorMessage,
+  onChangeHandler,
+  isValid,
 }) {
-  const [validityMessage, setValidityMessage] = useState('');
-  const inputRef = useRef(null);
+  // eslint-disable-next-line no-unused-vars
+  const [error, setError] = useState('');
 
-  const onChangeHandler = () => {
-    if (!inputRef.current.checkValidity()) {
-      return setValidityMessage('error');
+  useEffect(() => {
+    if (isValid) {
+      setError('');
+      if (!inputRef.current.validity.valid) {
+        setError('error');
+      }
     }
-    return setValidityMessage('');
-  };
+  }, [isValid]);
+  // const inputValue = inputRef.current.value;
+  // const onChangeHandler = (ref) => {
+  //   if (!ref.current.validity.valid) {
+  //     return setValidityMessage('error');
+  //   }
+  //   return setValidityMessage('');
+  // };
   return (
     <label htmlFor={inputId} className="formLabel">
       {children}
@@ -28,11 +41,18 @@ function InputDefault({
         name={inputName}
         type={inputType}
         pattern={inputPattern}
-        onChange={onChangeHandler}
+        onChange={() => (onChangeHandler() ? setError('') : setError('patten'))}
         ref={inputRef}
+        placeholder="placeholder text"
         required
       />
-      {validityMessage && <p>{validityMessage}</p>}
+      {!error && <p className="hiddenP" />}
+      {error &&
+        (inputRef.current.value.length === 0 ? (
+          <p className="validityMessage">require</p>
+        ) : (
+          <p className="validityMessage">{errorMessage}</p>
+        ))}
     </label>
   );
 }
@@ -43,10 +63,19 @@ InputDefault.propTypes = {
   inputType: PropTypes.string.isRequired,
   inputPattern: PropTypes.string,
   children: PropTypes.node.isRequired,
+  errorMessage: PropTypes.string,
+  onChangeHandler: PropTypes.func,
+  inputRef: PropTypes.shape({
+    current: PropTypes.instanceOf(Element),
+  }).isRequired,
+  isValid: PropTypes.number,
 };
 
 InputDefault.defaultProps = {
   inputPattern: '',
+  errorMessage: '',
+  isValid: 0,
+  onChangeHandler: () => {},
 };
 
 export default InputDefault;

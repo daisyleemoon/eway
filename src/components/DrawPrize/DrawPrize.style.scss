@@ -1,3 +1,5 @@
+@import '../../mixin';
+
 .drawPrizeContainer {
   display: grid;
   place-items: center;
@@ -7,9 +9,23 @@
   .drawPrizeItemsWrap {
     display: grid;
     margin: 65px 0 50px 0;
-    grid-template-columns: 1fr 1fr 1fr;
+    place-items: center;
     grid-auto-flow: row;
+    grid-template-columns: 1fr 1fr 1fr;
     gap: 40px 32px;
     width: 600px;
+    @include pad {
+      max-width: 600px;
+      width: 100%;
+      padding: 0 21px;
+    }
+    @media screen and (max-width: 600px) {
+      grid-template-columns: 1fr 1fr;
+    }
+    @include mobile {
+      width: 100%;
+      padding: 0 21px;
+      gap: 40px 16px;
+    }
   }
 }

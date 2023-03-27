@@ -1,25 +1,53 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
+import PropTypes from 'prop-types';
 
 import './InputStore.style.scss';
 
-function InputStore() {
+// eslint-disable-next-line no-unused-vars
+function InputStore({ isValid, errorMessage }) {
   const [inputValue, setInputValue] = useState('');
   const [validityMessage, setValidityMessage] = useState('');
   const datalistRef = useRef(null);
   const storeInputRef = useRef(null);
+
+  useEffect(() => {
+    if (isValid) {
+      setValidityMessage('');
+      if (!storeInputRef.current.validity.valid) {
+        setValidityMessage('error');
+      }
+    }
+  }, [isValid]);
 
   const inputChangeHandler = (event) => {
     const value = event.target.value.trim();
     const { options } = datalistRef.current;
     const optionsArray = [...options];
     setInputValue(value);
-    if (!optionsArray.some((option) => option.value === value)) {
+
+    const fuzzySearch = (str) =>
+      optionsArray.filter((option) => option.value.includes(str));
+
+    if (fuzzySearch(value).length === 0) {
       storeInputRef.current.setCustomValidity('error');
-      setValidityMessage('請輸入列表中的選項');
+      setValidityMessage('no result');
     } else {
+      if (!optionsArray.some((option) => option.value === value)) {
+        storeInputRef.current.setCustomValidity('error');
+        setValidityMessage('請輸入列表中的選項');
+        return;
+      }
       storeInputRef.current.setCustomValidity('');
       setValidityMessage('');
     }
+
+    // if (!optionsArray.some((option) => option.value === value)) {
+    //   storeInputRef.current.setCustomValidity('error');
+    //   setValidityMessage('請輸入列表中的選項');
+    // } else {
+    //   storeInputRef.current.setCustomValidity('');
+    //   setValidityMessage('');
+    // }
   };
 
   return (
@@ -33,6 +61,7 @@ function InputStore() {
         list="store-list"
         ref={storeInputRef}
         value={inputValue}
+        placeholder="placeholder text"
         onChange={inputChangeHandler}
         required
       />
@@ -41,9 +70,25 @@ function InputStore() {
         <option value="store2" aria-label="store-list" />
         <option value="store3" aria-label="store-list" />
       </datalist>
-      {validityMessage && <p className="errorMessage">{validityMessage}</p>}
+      {validityMessage.length === 0 && <p className="hiddenP" />}
+      {validityMessage.length > 0 &&
+        (storeInputRef.current.value.length === 0 ? (
+          <p className="validityMessage">require</p>
+        ) : (
+          <p className="validityMessage">{validityMessage}</p>
+        ))}
     </label>
   );
 }
+
+InputStore.propTypes = {
+  isValid: PropTypes.number,
+  errorMessage: PropTypes.string,
+};
+
+InputStore.defaultProps = {
+  isValid: 0,
+  errorMessage: '',
+};
 
 export default InputStore;

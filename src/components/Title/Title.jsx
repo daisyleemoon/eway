@@ -1,13 +1,15 @@
 import './Title.style.scss';
+import PropTypes from 'prop-types';
 import Button from '../Button/Button';
 import Paragraph from '../Paragraph/Paragraph';
-import supIcon from '../../images/sup1.png';
+import canoeIcon from '../../images/canoe.png';
 import supIcon2 from '../../images/sup2.png';
+import paddleIcon from '../../images/paddle.png';
 import bubbleLIcon from '../../images/bubble_large.png';
 import bubbleSIcon from '../../images/bubble_small.png';
 import fireworkIcon from '../../images/firework.png';
 
-function Title() {
+function Title({ scrollToForm }) {
   return (
     <div className="titleContainer">
       <div className="titleContent">
@@ -16,7 +18,9 @@ function Title() {
           <br />
           who loves pain
         </p>
-        <Button buttonType="button">FORM</Button>
+        <Button buttonType="button" scrollToForm={scrollToForm}>
+          FORM
+        </Button>
         <div className="titleParagraphContainer">
           <Paragraph>paragraph</Paragraph>
           <ol>
@@ -45,7 +49,8 @@ function Title() {
           <div className="supAndBubble">
             <img className="smallBubble" src={bubbleSIcon} alt="" />
             <img className="largeBubble" src={bubbleLIcon} alt="" />
-            <img className="sup" src={supIcon} alt="" />
+            <img className="sup" src={canoeIcon} alt="" />
+            <img className="paddle" src={paddleIcon} alt="" />
           </div>
           <img className="firework" src={fireworkIcon} alt="" />
           <img className="sup2" src={supIcon2} alt="" />
@@ -55,5 +60,13 @@ function Title() {
     </div>
   );
 }
+
+Title.propTypes = {
+  scrollToForm: PropTypes.func,
+};
+
+Title.defaultProps = {
+  scrollToForm: () => {},
+};
 
 export default Title;
