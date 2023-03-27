@@ -2,9 +2,18 @@ import DrawItem from '../DrawItem/DrawItem';
 import certificateAIcon from '../../images/certificateA.png';
 import certificateDIcon from '../../images/certificateD.png';
 import './DrawPrize.style.scss';
-import { prizeItems } from '../../data/data';
 
 function DrawPrize() {
+  const prizeItems = [
+    { prizeAward: 'A', prizeItem: 'dehumidifier', prizeAmount: 'ONE' },
+    { prizeAward: 'B', prizeItem: 'range hood', prizeAmount: 'ONE' },
+    { prizeAward: 'C', prizeItem: 'vacuum cleaner', prizeAmount: 'ONE' },
+    { prizeAward: 'D', prizeItem: 'toaster', prizeAmount: 'ONE' },
+    { prizeAward: 'E', prizeItem: 'scale', prizeAmount: 'ONE' },
+    { prizeAward: 'F', prizeItem: 'straightening iron', prizeAmount: 'ONE' },
+    { prizeAward: 'G', prizeItem: 'vacuum cleaner', prizeAmount: 'FIVE' },
+    { prizeAward: 'H', prizeItem: 'rice cooker', prizeAmount: 'TEN' },
+  ];
   const newPrizeItems = prizeItems.map((item) => ({
     ...item,
     id: Math.random(),

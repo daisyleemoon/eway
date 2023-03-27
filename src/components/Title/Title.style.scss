@@ -221,13 +221,43 @@
     }
   }
   .wave {
+    position: relative;
     padding: 0;
     height: 15%;
     width: 100%;
     border: none;
-    background-image: url(../../images/wave.png);
-    background-origin: border-box;
+    background-color: #e2d9d3;
+    overflow: hidden;
+  }
+  .waveInside {
+    z-index: 1;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 200%;
+    height: 100%;
+    background-color: #e2d9d3;
+    background-image: url(../../images/wave1.png);
+
     background-repeat: repeat-x;
-    background-size: 55% 100%;
+    animation: waveTranslate 30s linear infinite,
+      wave 1s linear infinite alternate;
+  }
+
+  @keyframes waveTranslate {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+  @keyframes wave {
+    0% {
+      top: 0px;
+    }
+    100% {
+      top: -10px;
+    }
   }
 }

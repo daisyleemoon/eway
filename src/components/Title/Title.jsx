@@ -56,7 +56,9 @@ function Title({ scrollToForm }) {
           <img className="sup2" src={supIcon2} alt="" />
         </div>
       </div>
-      <div className="wave" />
+      <div className="wave">
+        <div className="waveInside" />
+      </div>
     </div>
   );
 }

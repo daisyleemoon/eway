@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 
 import './InputStore.style.scss';
 
-// eslint-disable-next-line no-unused-vars
-function InputStore({ isValid, errorMessage }) {
+function InputStore({ isValid }) {
   const [inputValue, setInputValue] = useState('');
   const [validityMessage, setValidityMessage] = useState('');
   const datalistRef = useRef(null);
@@ -40,14 +39,6 @@ function InputStore({ isValid, errorMessage }) {
       storeInputRef.current.setCustomValidity('');
       setValidityMessage('');
     }
-
-    // if (!optionsArray.some((option) => option.value === value)) {
-    //   storeInputRef.current.setCustomValidity('error');
-    //   setValidityMessage('請輸入列表中的選項');
-    // } else {
-    //   storeInputRef.current.setCustomValidity('');
-    //   setValidityMessage('');
-    // }
   };
 
   return (
@@ -83,12 +74,10 @@ function InputStore({ isValid, errorMessage }) {
 
 InputStore.propTypes = {
   isValid: PropTypes.number,
-  errorMessage: PropTypes.string,
 };
 
 InputStore.defaultProps = {
   isValid: 0,
-  errorMessage: '',
 };
 
 export default InputStore;

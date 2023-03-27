@@ -40,7 +40,6 @@ function InputNumber({ children, errorMessage, isValid }) {
         required
       />
       {validityMessage.length === 0 && <p className="hiddenP" />}
-      {/* {validityMessage && <p className="validityMessage">{errorMessage}</p>} */}
       {validityMessage.length > 0 &&
         (inputNumberRef.current.value.length === 0 ? (
           <p className="validityMessage">require</p>

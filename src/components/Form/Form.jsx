@@ -10,30 +10,6 @@ import failureIcon from '../../images/failure.png';
 import './Form.style.scss';
 import InputNumber from '../InputNumber/InputNumber';
 
-// const initialState = {
-//   storeError: '',
-//   nameError: '',
-//   phoneError: '',
-//   amountError: '',
-// };
-
-// const formReducer = (state = initialState, { type, payload } = {}) => {
-//   switch (type) {
-//     case 'store':
-//       return { ...state, storeIsValid: payload };
-//     case 'name':
-//       return { ...state, nameError: payload };
-//     case 'phone':
-//       return { ...state, phoneError: payload };
-//     case 'amount':
-//       return { ...state, amountError: payload };
-//     // case 'payment':
-//     //   return { ...state, paymentIsValid: payload };
-//     default:
-//       return state;
-//   }
-// };
-
 function Form({ scrollTargetFormRef }) {
   const formRef = useRef(null);
   const inputNameRef = useRef(null);
@@ -42,12 +18,6 @@ function Form({ scrollTargetFormRef }) {
   const inputPaymentRef = useRef(null);
   const [isFormValid, setIsFormValid] = useState(null);
   const [buttonClassName, setButtonClassName] = useState('');
-  // eslint-disable-next-line no-unused-vars
-  const [isNameValid, setIsNameValid] = useState('');
-  // eslint-disable-next-line no-unused-vars
-  const [isPhoneValid, setIsPhoneValid] = useState('');
-  // eslint-disable-next-line no-unused-vars
-  const [isAmountValid, setIsAmountValid] = useState('');
   const [trigger, setTrigger] = useState(0);
 
   const nameChangeHandler = () => inputNameRef.current.validity.valid;
@@ -72,21 +42,8 @@ function Form({ scrollTargetFormRef }) {
           valid: x.validity.valid,
         };
       });
-    // const emptyInputs = formValues.filter((obj) => obj.value.length === 0);
     const formValidation = formValues.some((obj) => !obj.valid);
     setTrigger(trigger + 1);
-
-    // formValues.forEach((obj) => {
-    //   if (obj.name === 'name') {
-    //     setIsNameValid('error');
-    //   }
-    //   if (obj.name === 'phone') {
-    //     setIsPhoneValid('error');
-    //   }
-    //   if (obj.name === 'amount') {
-    //     setIsAmountValid('error');
-    //   }
-    // });
 
     if (!formValidation) {
       setIsFormValid(true);
@@ -107,7 +64,7 @@ function Form({ scrollTargetFormRef }) {
             inputId="name"
             inputName="name"
             inputRef={inputNameRef}
-            inputPattern="^[\u4e00-\u9fa5]+$|^[a-zA-Z\s]+$"
+            inputPattern="^[\u4E00-\u9FA5A-Za-z]+$"
             onChangeHandler={nameChangeHandler}
             errorMessage="請輸入中英文字母不包含數字及特殊符號"
             isValid={trigger}

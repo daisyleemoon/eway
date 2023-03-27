@@ -14,7 +14,6 @@ function InputDefault({
   onChangeHandler,
   isValid,
 }) {
-  // eslint-disable-next-line no-unused-vars
   const [error, setError] = useState('');
 
   useEffect(() => {
@@ -25,13 +24,7 @@ function InputDefault({
       }
     }
   }, [isValid]);
-  // const inputValue = inputRef.current.value;
-  // const onChangeHandler = (ref) => {
-  //   if (!ref.current.validity.valid) {
-  //     return setValidityMessage('error');
-  //   }
-  //   return setValidityMessage('');
-  // };
+
   return (
     <label htmlFor={inputId} className="formLabel">
       {children}
